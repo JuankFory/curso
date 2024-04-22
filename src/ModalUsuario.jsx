@@ -10,9 +10,9 @@ export const ModalUsuario =(props)=> {
 
   return (
     <>
-      <Button variant="info" onClick={handleShow}>
+    {/*   <Button variant="info" onClick={handleShow}>
         Launch demo modal
-      </Button>
+      </Button> */}
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

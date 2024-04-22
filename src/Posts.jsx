@@ -78,11 +78,11 @@ export const Api=  (props)=>{
         
         if(jsondata!== null){
             const newData =(data.filter(item => item.id === id));
-            setData(jsondata);
+                       setData(jsondata);
            
             
             console.log("Dato Filtardo con id "+ id);
-            console.log(newData);
+          
             console.log(jsondata);
         }else{
             console.log("Error al Filtar");
@@ -132,14 +132,15 @@ setContador(contador+1);
     <table className='table table-dark table-hover mt-2'>
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>City</th>
-                <th>street</th>
-                <th>Suite</th>
-                <th colSpan={3}>Actions</th>
+                <th class="bg-success">Id</th>
+                <th class="bg-success">Name</th>
+                <th class="bg-success">Username</th>
+                <th class="bg-success">Email</th>
+                <th class="bg-success">City</th>
+                <th class="bg-success">street</th>
+                <th class="bg-success">Suite</th>
+                <th class="bg-success">Zipcode</th>
+                <th class="bg-success" colSpan={3}>Actions</th>
              
             </tr>
         </thead>
@@ -152,7 +153,8 @@ setContador(contador+1);
                     <td>{item.email}</td>   
                     <td>{item.address.city}</td>   
                     <td>{item.address.street}</td>  
-                    <td>{item.address.suite}</td>    
+                    <td>{item.address.suite}</td>   
+                    <td>{item.address.zipcode}</td>    
                     <td>
          <button title='Crear' style={{marginRight:'3px'}} className='btn btn-warning' onClick={()=>Crear()}><FaUserPlus/></button>
         
