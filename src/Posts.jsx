@@ -15,7 +15,7 @@ export const Api=  (props)=>{
     const [data,setData]= useState([]);
     const [modal, setModal]= useState(false);
     var codfiltro=0;
-   // const openModal=()=>setModal(true)
+   //const openModal=()=>setModal(true)
     //const closeModal=()=>setModal(false)
 
     useEffect(function(){
@@ -36,7 +36,8 @@ export const Api=  (props)=>{
               name: 'Juan Carlos',
               username: 'juanfory',
               email: "juankfory4@gmail.com",
-              address: { street: "Estados Unidos", city: "Angeles", suite: "Apt. Fory" },
+              address: { street: "Estados Unidos",
+               city: "Angeles", suite: "Apt. Fory", zipcode:"00000-1111" },
             }),
             headers: {
               'Content-type': 'application/json; charset=UTF-8',
@@ -156,7 +157,10 @@ setContador(contador+1);
                     <td>{item.address.suite}</td>   
                     <td>{item.address.zipcode}</td>    
                     <td>
-         <button title='Crear' style={{marginRight:'3px'}} className='btn btn-warning' onClick={()=>Crear()}><FaUserPlus/></button>
+         <button title='Crear' style={{marginRight:'3px'}} className='btn btn-warning' onClick={()=>setModal(true)}>
+         {modal && <ModalUsuario />}
+        
+        <FaUserPlus/></button>
         
         <button title='Actuallizar' style={{marginRight:'3px'}} className='btn btn-success' onClick={()=>EditData(5)}><FaEdit /></button>
 <button title='Eliminar' style={{marginRight:'3px'}} className='btn btn-danger'

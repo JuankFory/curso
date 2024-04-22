@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
@@ -8,11 +8,13 @@ export const ModalUsuario =(props)=> {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+ 
+
   return (
     <>
-    {/*   <Button variant="info" onClick={handleShow}>
-        Launch demo modal
-      </Button> */}
+     <Button variant="info" onClick={handleShow}>
+        Modal dato
+      </Button> 
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -33,11 +35,8 @@ export const ModalUsuario =(props)=> {
           <input type="text" placeholder='Digite su Direccion' />
           <span>Suite</span>
           <input type="text" placeholder='Digite su Apartamento' />
-            </div>
-      
+          </div>      
           </div>
-       
-
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
