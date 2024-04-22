@@ -2,20 +2,21 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ImTerminal   } from "react-icons/im";
 import {AiFillDelete  } from "react-icons/ai"
-import { FaRegFileArchive, FaUserPlus } from "react-icons/fa";
+import {  FaUserPlus } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
 import {useState,useEffect} from "react";
-import {Modal} from "./ModalUsuario";
+import {ModalUsuario} from "./ModalUsuario";
 //import { array } from 'prop-types';
 import "./Api.css";
  
-export const Api=  ()=>{
+export const Api=  (props)=>{
     const [contador, setContador]= useState(0);
     const [data,setData]= useState([]);
     const [modal, setModal]= useState(false);
-    const openModal=()=>setModal(true)
-    const closeModal=()=>setModal(false)
+    var codfiltro=0;
+   // const openModal=()=>setModal(true)
+    //const closeModal=()=>setModal(false)
 
     useEffect(function(){
          fetchData();        
@@ -24,34 +25,37 @@ export const Api=  ()=>{
     const Crear = async()=>{       
 
     
-        console.log("Metodo crear con numero ");
+        console.log("Funciona el Metodo crear");
     }
-    const EditData= async (id)=>{
-        const Edit=  await fetch('https://jsonplaceholder.typicode.com/posts/'+id, {
+    const EditData = async (id) => {
+        try {
+          const edit = await fetch('https://jsonplaceholder.typicode.com/posts/' + id, {
             method: 'PUT',
             body: JSON.stringify({
               id: +id,
               name: 'Juan Carlos',
               username: 'juanfory',
               email: "juankfory4@gmail.com",
-              address:{street:"Estados Unidos",city:"Angeles", suite:"Apt. Fory"},
+              address: { street: "Estados Unidos", city: "Angeles", suite: "Apt. Fory" },
             }),
             headers: {
               'Content-type': 'application/json; charset=UTF-8',
             },
-          }).then((response) => response.json())
-          .then((json) => console.log(json));
-          
-         if(Edit !==null){
-            const dataUpdate=data.map(item=>item.id===id ? Edit:item);
-          
-           setData(dataUpdate);
-            console.log("Dato Actualizado con # "+id);
-         }else{
-            console.log("Error al Actualizar");
-         }
-    }
- 
+          });
+      
+          if (!edit.ok) {
+            throw new Error('Error al actualizar el dato');
+          }      
+          const updatedData = await edit.json();   
+          // Actualiza los datos en el estado
+          setData(data.map(item => item.id === id ? updatedData : item));
+      
+          console.log("Dato Actualizado con # " + id);
+        } catch (error) {
+          console.error("Error al actualizar:", error.message);
+        }
+      };
+      
     const EliminarData = async (id) => {
         const eliminar = await fetch('https://jsonplaceholder.typicode.com/users/'+id, {
             method: 'DELETE',
@@ -69,12 +73,19 @@ export const Api=  ()=>{
     }
 
     const FiltarData =async (id)=> {
-
-        const filtar= fetch('https://jsonplaceholder.typicode.com/users?id='+id)
-        .then((response) => response.json())
-        .then((json) => console.log(json));
-        if(filtar!== null){
-            console.log("Dato Filtardo");
+        const filtar= await fetch('https://jsonplaceholder.typicode.com/users?id='+id);
+        const jsondata= await filtar.json();
+        
+        if(jsondata!== null){
+            const newData =(data.filter(item => item.id === id));
+            setData(jsondata);
+           
+            
+            console.log("Dato Filtardo con id "+ id);
+            console.log(newData);
+            console.log(jsondata);
+        }else{
+            console.log("Error al Filtar");
         }
     }
 
@@ -89,12 +100,13 @@ return( <div className='container-fluid'>
    
   <h1 style={{textAlign:"center"}}>Datos de una Api Prueba # {contador}</h1>
   <span>Codigo</span>
-  <input placeholder='Filtrar por codigo' type='number'onChange={function(e,texto){
-    texto= (e.target.value);
-    console.log(texto);
+  <input  placeholder='Filtrar por codigo' type='number'onChange={function(e){
+    codfiltro = (e.target.value);
+    console.log(codfiltro);    
 
-  }} /><button className='btn btn-success btnspace' onClick={function(){
-    FiltarData(1)
+  }} /><button className='btn btn-success btnspace' onClick={function(props){
+   
+    FiltarData(codfiltro)
   }}><FaSearch /></button>
   <button  className="btn btn-primary btnspace" onClick={function(){
 fetch("https://jsonplaceholder.typicode.com/users").then(res=>res.json()).then(data=>console.log(data)).catch(console.error());
@@ -114,8 +126,8 @@ setContador(contador+1);
     setContador(0)
 }}>Reiniciar</button>
 
-<button className='btn btn-info'onClick={openModal} >Open Modal</button>
-{modal && <Modal closeModal={closeModal} />}
+<button className='btn btn-info'onClick={()=>setModal(true)} >Open Modal</button>
+    {modal && <ModalUsuario />}
 
     <table className='table table-dark table-hover mt-2'>
         <thead>
@@ -144,7 +156,7 @@ setContador(contador+1);
                     <td>
          <button title='Crear' style={{marginRight:'3px'}} className='btn btn-warning' onClick={()=>Crear()}><FaUserPlus/></button>
         
-        <button title='Actuallizar' style={{marginRight:'3px'}} className='btn btn-success' onClick={()=>EditData(1)}><FaEdit /></button>
+        <button title='Actuallizar' style={{marginRight:'3px'}} className='btn btn-success' onClick={()=>EditData(5)}><FaEdit /></button>
 <button title='Eliminar' style={{marginRight:'3px'}} className='btn btn-danger'
  onClick={function(){
     EliminarData(3)

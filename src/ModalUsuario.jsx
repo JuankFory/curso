@@ -1,30 +1,54 @@
-import React from "react";
-export const Modal= ()=>{
+import { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
-    
-    <div>
-        return(
-            <div class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+export const ModalUsuario =(props)=> {
+  const [show, setShow] = useState(false);
 
-        )
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
-    </div>
+  return (
+    <>
+      <Button variant="info" onClick={handleShow}>
+        Launch demo modal
+      </Button>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Registrar sus Datos</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className='form-control mb-3'>
+            <div className='row'>
+            <span>Name</span>
+          <input type="text" placeholder='Digite su Nombre' />
+          <span>UserName</span>
+          <input type="text"placeholder='Digite su usuario' />
+          <span>Email</span>
+          <input type="email" required="email" placeholder='Digite su Correo' />
+          <span>City</span>
+          <input type="text" placeholder='Digite su Ciudad' />
+          <span>Street</span>
+          <input type="text" placeholder='Digite su Direccion' />
+          <span>Suite</span>
+          <input type="text" placeholder='Digite su Apartamento' />
+            </div>
+      
+          </div>
+       
+
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cerrar
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Guardar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
 }
+

@@ -29,6 +29,7 @@ export const App = () => {
         
         // Establece los datos en el estado
         setTableData(transactionList);
+        
       } catch (error) {
         console.error("Error al obtener los datos:", error);
       }

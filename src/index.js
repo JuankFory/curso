@@ -8,6 +8,7 @@ import {/*Greeting*/ Greeting, UserCard,} from "./Greeting";
 import {Button} from "./Button"
 import {Api} from "./Posts";
 import { App } from './Dato';
+import { Employee } from './Employee';
 import { Modal } from 'bootstrap';
 
 
@@ -39,8 +40,9 @@ console.log(e.target.value)
     console.log("Enviando Dato")
   }}>Enviar</button>
 </form> */}
-    <Api/>
+    <Api />
     <App/>
+    <Employee/>
   </React.StrictMode>
 );
 
