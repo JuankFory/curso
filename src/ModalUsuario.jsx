@@ -4,11 +4,8 @@ import Modal from 'react-bootstrap/Modal';
 
 export const ModalUsuario =(props)=> {
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
- 
 
   return (
     <>

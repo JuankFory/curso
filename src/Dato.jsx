@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchDataFromSoapService } from './Services';
+import {Soap} from "./ServiceWeb";
 import "./Api.css"
 
 //import {Xml} from 'xml2js';
@@ -10,7 +11,8 @@ export const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const soapResponse = await fetchDataFromSoapService();
+        debugger;
+        const soapResponse = await new Soap();
         // Extrae los datos XML de la respuesta SOAP
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(soapResponse, "text/xml");
@@ -18,17 +20,13 @@ export const App = () => {
         let Elements= xmlDoc.getElementsByTagName("LIST_OF_LISTATRN");
         for (let i = 0; i < Elements.length; i++) {
             const element= [];
-             element = Elements[i];
+             element[0] = Elements[i];
             console.log("juan")
         }
         // Encuentra la lista de transacciones dentro del XML
-        const transactionList = xmlDoc.querySelectorAll('LIST_OF_LISTATRN');
-        // Procesa los datos de la lista de transacciones y construye una matriz de objetos
-       
-   
-        
-        // Establece los datos en el estado
-        setTableData(transactionList);
+        ///const transactionList = xmlDoc.querySelectorAll('LIST_OF_LISTATRN');
+        debugger;
+        setTableData(xmlDoc);
         
       } catch (error) {
         console.error("Error al obtener los datos:", error);
@@ -61,6 +59,7 @@ export const App = () => {
           </tr>
         </thead>
         <tbody>
+
        
         </tbody>
       </table>

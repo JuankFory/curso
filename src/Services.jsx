@@ -1,3 +1,5 @@
+  
+
 // Define la función para hacer la solicitud SOAP
 export const fetchDataFromSoapService = async () => {
     const url = "https://servicios.taylor-johnson.co:10105/web/services/parametrizarUrsCanTrnService/parametrizarUrsCanTrn";
@@ -26,16 +28,25 @@ export const fetchDataFromSoapService = async () => {
   // Crear la solicitud XMLHttpRequest
   var xhr = new XMLHttpRequest();
   xhr.open('POST', url, true);
-  xhr.setRequestHeader('Content-Type', 'text/xml');
+  xhr.setRequestHeader('Content-Type', 'text/json');
   // Manejar la respuesta
   xhr.onreadystatechange = function () {
      if (xhr.readyState === 4 && xhr.status === 200) {
          // La respuesta está en xhr.responseText
          console.log((xhr.responseText));
+         console.log("Esta mostrando el consumo desde Service");
          // Mostrar la respuesta en la tabla
          //updateTable(xhr.responseText);
      }
   };
+
+  const Elements= document.getElementsByTagName('LIST_OF_LISTATRN');
+  for (let i = 0; i < Elements.length; i++) {
+    const element = Elements[i];  
+    console.log("Esto se muestra desde el metodo for");
+    console.log(element);
+  }
+
   
   // Enviar la solicitud SOAP
   xhr.send(soapEnvelope);

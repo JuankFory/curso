@@ -10,6 +10,9 @@ import {Api} from "./Posts";
 import { App } from './Dato';
 import { Employee } from './Employee';
 import { Modal } from 'bootstrap';
+import {Soap} from "./ServiceWeb";
+
+//import {refresh} from "react-refresh"
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -42,6 +45,7 @@ console.log(e.target.value)
 </form> */}
     <Api />
     <App/>
+   <Soap/>
     <Employee/>
   </React.StrictMode>
 );
