@@ -52,7 +52,7 @@ export const Soap = () => {
         const xmlSoap = parser.parseFromString(soapResponse, "text/xml");
 
         const convert = require('xml-js');
-        const jsondata= convert.xml2json(xmlSoap., {compact: true, spaces: 4});
+        const jsondata= convert.xml2json(xmlSoap, {compact: true, spaces: 4});
         setxmlDoc(xmldata)
         console.log("Lo que devuelve el servicio Soap transformado");
         console.log(jsondata);
