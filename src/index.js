@@ -4,12 +4,12 @@ import './index.css';
 import "./Api.css";
 //import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {/*Greeting*/ Greeting, UserCard,} from "./Greeting";
-import {Button} from "./Button"
+//import {/*Greeting*/ Greeting, UserCard,} from "./Greeting";
+//import {Button} from "./Button"
 import {Api} from "./Posts";
-import { App } from './Dato';
+//import { App } from './Dato';
 import { Employee } from './Employee';
-import { Modal } from 'bootstrap';
+//import { Modal } from 'bootstrap';
 import {Soap} from "./ServiceWeb";
 
 //import {refresh} from "react-refresh"
@@ -44,7 +44,7 @@ console.log(e.target.value)
   }}>Enviar</button>
 </form> */}
     <Api />
-    <App/>
+   
    <Soap/>
     <Employee/>
   </React.StrictMode>

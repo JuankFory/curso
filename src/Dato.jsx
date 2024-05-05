@@ -26,7 +26,7 @@ export const App = () => {
         // Encuentra la lista de transacciones dentro del XML
         ///const transactionList = xmlDoc.querySelectorAll('LIST_OF_LISTATRN');
         debugger;
-        setTableData(xmlDoc);
+        //setTableData(xmlDoc);
         
       } catch (error) {
         console.error("Error al obtener los datos:", error);
