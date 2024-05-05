@@ -46,33 +46,33 @@ export const Soap = () => {
 
       try {
         const response = await fetch(url, requestOptions);
-        xml = await response.text();
-        console.log("Xml dentro de la funcion", xml);
-        setSoapResponse(xml);
+         const xmldata = await response.text();
+        console.log("Xml dentro de la funcion", xmldata);
+        setSoapResponse(xmldata);
       } catch (error) {
         console.error("Error al realizar la solicitud SOAP:", error);
       }
     };
     const convert = require("xml-js");
-    const jsondata = convert.xml2json(soapResponse, {compact: true,spaces: 4,});
-    if(jsondata!==null){
-        debugger;
-        console.log("Lo que devuelve el servicio Soap transformado", soapResponse);
-        console.log("Data de Json data", jsondata);
-       // const jsondata2 = JSON.stringify(jsondata);
-        //console.log("Ddata de Json Parseado", jsondata2);
-        setSoapResponse(jsondata);
-    }else{
-        console.log("Esta vacia la data del Soap");
+    const jsondata = convert.xml2json(soapResponse, {compact: true,spaces: 4 });
+    if (jsondata !== null) {
+      debugger;
+      console.log(
+        "Lo que devuelve el servicio Soap transformado",jsondata);
+      //console.log("Data de Json data", jsondata);
+      // const jsondata2 = JSON.stringify(jsondata);
+      //console.log("Ddata de Json Parseado", jsondata2);
+      setSoapResponse(jsondata);
+    } else {
+      console.log("Esta vacia la data del Soap");
     }
-   
-
 
     Data();
   }, []);
 
   return (
     <div>
+        
       <table id="t01" border="2" className="table table-striped table-hover">
         <thead>
           <tr>
@@ -93,8 +93,9 @@ export const Soap = () => {
           </tr>
         </thead>
         <tbody>
+        {console.log("Valor que llega en la Tabla", soapResponse)}
             
-          </tbody>
+        </tbody>
       </table>
     </div>
   );
